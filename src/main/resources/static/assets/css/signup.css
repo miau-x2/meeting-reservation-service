@@ -1,0 +1,64 @@
+.signup-page {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at top, rgba(13, 110, 253, 0.12), transparent 32%),
+        linear-gradient(180deg, #f8fbff 0%, #eef3f8 100%);
+}
+
+.signup-card {
+    border-radius: 1.25rem;
+    backdrop-filter: blur(10px);
+}
+
+.signup-kicker {
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    color: #5c6f82;
+}
+
+.field-feedback {
+    min-height: 1.25rem;
+    margin-top: 0.35rem;
+    font-size: 0.875rem;
+    line-height: 1.2;
+}
+
+.field-feedback.is-invalid {
+    color: var(--bs-danger);
+}
+
+.field-feedback.is-valid {
+    color: var(--bs-success);
+}
+
+.form-control.is-valid,
+.form-control.is-invalid {
+    background-image: none !important;
+    padding-right: 0.75rem !important;
+}
+
+#password.form-control.is-valid,
+#password.form-control.is-invalid {
+    padding-right: 3rem !important;
+}
+
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 0.75rem;
+    transform: translateY(-50%);
+    border: 0;
+    background: transparent;
+    color: var(--bs-secondary-color);
+    padding: 0;
+    line-height: 1;
+}
+
+.password-toggle:hover {
+    color: var(--bs-body-color);
+}
+
+.password-toggle i {
+    font-size: 1.1rem;
+}
