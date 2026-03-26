@@ -12,7 +12,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.FieldError;
+
+import java.time.Clock;
+import java.time.LocalDateTime;
 
 import static com.example.meeting.reservation.common.StringNormalizer.normalize;
 
@@ -22,6 +24,7 @@ import static com.example.meeting.reservation.common.StringNormalizer.normalize;
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final PasswordEncoder passwordEncoder;
+    private final Clock clock;
 
     @Transactional
     public void signup(EmployeeCreateRequest request) {
@@ -45,5 +48,10 @@ public class EmployeeService {
     public boolean isUsernameAvailable(String username) {
         var normalizedUsername = normalize(username);
         return !employeeRepository.existsByUsername(normalizedUsername);
+    }
+
+    @Transactional
+    public void updateLastLoginAt(String username) {
+        employeeRepository.updateLastLoginAt(username, LocalDateTime.now(clock));
     }
 }
