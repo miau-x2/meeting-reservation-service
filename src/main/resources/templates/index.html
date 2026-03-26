@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,6 +19,10 @@
                     <h1 class="display-5 fw-semibold mb-3">회의실 예약을 더 빠르고 명확하게 관리하세요.</h1>
 
                     <div class="d-flex flex-wrap gap-2 mb-4">
+                        <a class="btn btn-outline-secondary btn-lg px-4" sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a>
+                        <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-outline-secondary btn-lg px-4">로그아웃</button>
+                        </form>
                         <a class="btn btn-outline-primary btn-lg px-4" th:href="@{/employees/signup}">회원가입</a>
                         <a class="btn btn-outline-dark btn-lg px-4" href="#features">주요 기능 보기</a>
                     </div>
@@ -108,6 +112,12 @@
                     <article class="feature-card h-100">
                         <div class="feature-icon"><i class="bi bi-people"></i></div>
                         <h3 class="h5">예약 내역 확인</h3>
+                    </article>
+                </div>
+                <div class="col-md-4" sec:authorize="hasAuthority('ADMIN')">
+                    <article class="feature-card h-100">
+                        <div class="feature-icon"><i class="bi bi-gear-wide-connected"></i></div>
+                        <h3 class="h5">관리자 대시보드</h3>
                     </article>
                 </div>
             </div>

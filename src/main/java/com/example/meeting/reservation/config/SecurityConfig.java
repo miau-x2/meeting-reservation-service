@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.web.configurers.SessionMan
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration(proxyBeanMethods = false)
 public class SecurityConfig {
@@ -18,12 +20,16 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) {
+    public SecurityFilterChain securityFilterChain(
+            HttpSecurity http,
+            AuthenticationSuccessHandler authenticationSuccessHandler,
+            AuthenticationFailureHandler authenticationFailureHandler) {
         http.csrf(AbstractHttpConfigurer::disable);
         http.httpBasic(AbstractHttpConfigurer::disable);
         http.authorizeHttpRequests(authorize -> authorize
                 .requestMatchers(
                         "/",
+                        "/login",
                         "/employees/signup",
                         "/employees/check-username",
                         "/assets/**",
@@ -35,6 +41,9 @@ public class SecurityConfig {
         );
         http.formLogin(login -> login
                 .loginPage("/login")
+                .loginProcessingUrl("/login")
+                .successHandler(authenticationSuccessHandler)
+                .failureHandler(authenticationFailureHandler)
                 .permitAll()
         );
         http.logout(logout -> logout

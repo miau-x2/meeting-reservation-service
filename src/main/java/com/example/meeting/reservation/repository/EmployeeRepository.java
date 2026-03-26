@@ -3,6 +3,9 @@ package com.example.meeting.reservation.repository;
 import com.example.meeting.reservation.entity.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+import java.util.Optional;
+
+public interface EmployeeRepository extends JpaRepository<Employee, Long>, EmployeeRepositoryCustom {
     boolean existsByUsername(String username);
+    Optional<Employee> findByUsername(String username);
 }
