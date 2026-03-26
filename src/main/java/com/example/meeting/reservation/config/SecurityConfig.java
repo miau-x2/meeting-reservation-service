@@ -1,0 +1,52 @@
+package com.example.meeting.reservation.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.SessionManagementConfigurer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration(proxyBeanMethods = false)
+public class SecurityConfig {
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) {
+        http.csrf(AbstractHttpConfigurer::disable);
+        http.httpBasic(AbstractHttpConfigurer::disable);
+        http.authorizeHttpRequests(authorize -> authorize
+                .requestMatchers(
+                        "/",
+                        "/employees/signup",
+                        "/employees/check-username",
+                        "/assets/**",
+                        "/favicon.ico",
+                        "/error"
+                )
+                .permitAll()
+                .anyRequest().authenticated()
+        );
+        http.formLogin(login -> login
+                .loginPage("/login")
+                .permitAll()
+        );
+        http.logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
+                .permitAll()
+        );
+        http.sessionManagement(sessions -> sessions
+                .sessionFixation(SessionManagementConfigurer.SessionFixationConfigurer::changeSessionId)
+                .maximumSessions(1)
+                .maxSessionsPreventsLogin(false)
+        );
+        return http.build();
+    }
+}
