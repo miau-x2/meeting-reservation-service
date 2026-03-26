@@ -1,15 +1,14 @@
 package com.example.meeting.reservation.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Entity
@@ -28,6 +27,8 @@ public class Employee extends BaseEntity {
     @NotNull
     @Enumerated(EnumType.STRING)
     private EmployeeRole role;
+    @Column(name = "last_login_at")
+    private LocalDateTime lastLoginAt;
 
     private Employee(String username, String password, String name, EmployeeRole role) {
         this.username = username;
@@ -38,5 +39,9 @@ public class Employee extends BaseEntity {
 
     public static Employee createStaff(String username, String password, String name) {
         return new Employee(username, password, name, EmployeeRole.STAFF);
+    }
+
+    public void updateLastLoginAt(LocalDateTime lastLoginAt) {
+        this.lastLoginAt = lastLoginAt;
     }
 }

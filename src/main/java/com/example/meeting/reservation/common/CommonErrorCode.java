@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 public enum CommonErrorCode implements ApiCode {
+    NOT_FOUND("COMMON_404_001", "찾을 수 없는 리소스입니다.", HttpStatus.NOT_FOUND),
     INTERNAL_SERVER_ERROR("COMMON_500_001", "현재 요청을 처리할 수 없습니다. 잠시 후 다시 시도해주세요.", HttpStatus.INTERNAL_SERVER_ERROR)
     ;
 

@@ -20,10 +20,7 @@ public class GlobalExceptionHandler {
     public String handleNoResourceFoundException(
             HttpServletResponse response,
             Model model) {
-        response.setStatus(HttpStatus.NOT_FOUND.value());
-        model.addAttribute("status", HttpStatus.NOT_FOUND.value());
-        model.addAttribute("message", "요청한 페이지를 찾을 수 없습니다.");
-        return "error";
+        return renderError(response, model, HttpStatus.NOT_FOUND, "요청한 페이지를 찾을 수 없습니다.");
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
@@ -32,7 +29,7 @@ public class GlobalExceptionHandler {
             HttpServletResponse response,
             Model model) {
         log.error("데이터 무결성 예외가 발생했습니다.", e);
-        return renderInternalServerError(response, model);
+        return renderError(response, model, HttpStatus.INTERNAL_SERVER_ERROR, ErrorMessageConst.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(Exception.class)
@@ -41,13 +38,17 @@ public class GlobalExceptionHandler {
             HttpServletResponse response,
             Model model) {
         log.error("처리되지 않은 예외가 발생했습니다.", e);
-        return renderInternalServerError(response, model);
+        return renderError(response, model, HttpStatus.INTERNAL_SERVER_ERROR, ErrorMessageConst.INTERNAL_SERVER_ERROR);
     }
 
-    private String renderInternalServerError(HttpServletResponse response, Model model) {
-        response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-        model.addAttribute("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
-        model.addAttribute("message", ErrorMessageConst.INTERNAL_SERVER_ERROR);
+    private String renderError(
+            HttpServletResponse response,
+            Model model,
+            HttpStatus status,
+            String message) {
+        response.setStatus(status.value());
+        model.addAttribute("status", status.value());
+        model.addAttribute("message", message);
         return ERROR_VIEW_NAME;
     }
 }
