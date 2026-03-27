@@ -16,7 +16,7 @@
             <div class="row align-items-center g-4">
                 <div class="col-lg-6">
                     <p class="hero-kicker mb-3">Meeting Reservation Service</p>
-                    <h1 class="display-5 fw-semibold mb-3">회의실 예약을 더 빠르고 명확하게 관리하세요.</h1>
+                    <h1 class="display-5 fw-semibold mb-3">회의실 예약을 빠르고 명확하게 관리하세요.</h1>
 
                     <div class="d-flex flex-wrap gap-2 mb-4">
                         <a class="btn btn-outline-secondary btn-lg px-4" sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a>
@@ -58,22 +58,22 @@
                                     <div class="timeline-item active">
                                         <span class="timeline-time">09:30</span>
                                         <div>
-                                            <strong>프로젝트 킥오프</strong>
-                                            <p class="mb-0">개발팀 · 40분</p>
+                                            <strong>프로젝트 회의</strong>
+                                            <p class="mb-0">개발팀 주간 40분</p>
                                         </div>
                                     </div>
                                     <div class="timeline-item">
                                         <span class="timeline-time">11:00</span>
                                         <div>
                                             <strong>디자인 리뷰</strong>
-                                            <p class="mb-0">프로덕트팀 · 30분</p>
+                                            <p class="mb-0">프로덕트 주간 30분</p>
                                         </div>
                                     </div>
                                     <div class="timeline-item">
                                         <span class="timeline-time">14:00</span>
                                         <div>
                                             <strong>주간 운영 회의</strong>
-                                            <p class="mb-0">운영팀 · 1시간</p>
+                                            <p class="mb-0">운영팀 주간 1시간</p>
                                         </div>
                                     </div>
                                 </div>
@@ -114,11 +114,13 @@
                         <h3 class="h5">예약 내역 확인</h3>
                     </article>
                 </div>
-                <div class="col-md-4" sec:authorize="hasAuthority('ADMIN')">
-                    <article class="feature-card h-100">
-                        <div class="feature-icon"><i class="bi bi-gear-wide-connected"></i></div>
-                        <h3 class="h5">관리자 대시보드</h3>
-                    </article>
+                <div class="col-md-4" sec:authorize="hasRole('ADMIN')">
+                    <a class="feature-card-link" th:href="@{/admin/dashboard}">
+                        <article class="feature-card h-100">
+                            <div class="feature-icon"><i class="bi bi-gear-wide-connected"></i></div>
+                            <h3 class="h5">관리자 대시보드</h3>
+                        </article>
+                    </a>
                 </div>
             </div>
         </div>

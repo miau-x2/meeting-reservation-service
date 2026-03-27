@@ -172,6 +172,17 @@
     box-shadow: 0 0.75rem 2rem rgba(31, 42, 55, 0.04);
 }
 
+.feature-card-link {
+    display: block;
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+}
+
+.feature-card-link:hover {
+    color: inherit;
+}
+
 .feature-card p {
     color: #607184;
 }
