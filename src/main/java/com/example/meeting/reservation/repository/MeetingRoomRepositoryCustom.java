@@ -6,7 +6,7 @@ import com.example.meeting.reservation.dto.MeetingRoomListItem;
 import org.springframework.data.domain.Pageable;
 
 public interface MeetingRoomRepositoryCustom {
-    PageResponse<MeetingRoomListItem> getActiveRooms(Pageable pageable);
+    PageResponse<MeetingRoomListItem> getActiveRooms(Integer floor, Pageable pageable);
     PageResponse<AdminMeetingRoomListItem> getAdminRooms(Integer floor, Boolean active, Pageable pageable);
     void updateActive(Long id, boolean active);
 }
