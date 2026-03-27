@@ -62,8 +62,8 @@ public class MeetingRoomService {
     }
 
     @PreAuthorize("hasAnyRole('STAFF', 'ADMIN')")
-    public PageResponse<MeetingRoomListItem> getActiveRooms(Pageable pageable) {
-        return meetingRoomRepository.getActiveRooms(pageable);
+    public PageResponse<MeetingRoomListItem> getActiveRooms(Integer floor, Pageable pageable) {
+        return meetingRoomRepository.getActiveRooms(floor, pageable);
     }
 
     @PreAuthorize("hasRole('ADMIN')")

@@ -20,8 +20,14 @@ public class MeetingRoomRepositoryImpl implements MeetingRoomRepositoryCustom {
     private final JPAQueryFactory jpaQueryFactory;
 
     @Override
-    public PageResponse<MeetingRoomListItem> getActiveRooms(Pageable pageable) {
+    public PageResponse<MeetingRoomListItem> getActiveRooms(Integer floor, Pageable pageable) {
         QMeetingRoom meetingRoom = QMeetingRoom.meetingRoom;
+        var predicate = new BooleanBuilder();
+        predicate.and(meetingRoom.active.isTrue());
+
+        if (floor != null) {
+            predicate.and(meetingRoom.floor.eq(floor));
+        }
 
         var content = jpaQueryFactory
                 .select(Projections.constructor(
@@ -33,7 +39,7 @@ public class MeetingRoomRepositoryImpl implements MeetingRoomRepositoryCustom {
                         meetingRoom.description
                 ))
                 .from(meetingRoom)
-                .where(meetingRoom.active.isTrue())
+                .where(predicate)
                 .orderBy(meetingRoom.floor.asc(), meetingRoom.name.asc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -42,7 +48,7 @@ public class MeetingRoomRepositoryImpl implements MeetingRoomRepositoryCustom {
         var count = jpaQueryFactory
                 .select(meetingRoom.count())
                 .from(meetingRoom)
-                .where(meetingRoom.active.isTrue())
+                .where(predicate)
                 .fetchOne();
 
         var totalElements = count == null ? 0L : count;
