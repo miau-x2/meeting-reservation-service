@@ -57,6 +57,7 @@ public class SecurityConfig {
                 .sessionFixation(SessionManagementConfigurer.SessionFixationConfigurer::changeSessionId)
                 .maximumSessions(1)
                 .maxSessionsPreventsLogin(false)
+                .expiredUrl("/")
         );
         return http.build();
     }

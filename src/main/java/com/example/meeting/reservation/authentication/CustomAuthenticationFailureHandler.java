@@ -1,7 +1,7 @@
 package com.example.meeting.reservation.authentication;
 
-import com.example.meeting.reservation.common.ErrorMessageConst;
-import com.example.meeting.reservation.common.FlashMapKey;
+import com.example.meeting.reservation.common.util.ErrorMessageConst;
+import com.example.meeting.reservation.common.util.FlashMapKey;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

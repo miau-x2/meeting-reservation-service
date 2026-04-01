@@ -1,4 +1,4 @@
-package com.example.meeting.reservation.common;
+package com.example.meeting.reservation.common.util;
 
 public final class FlashMapKey {
     private FlashMapKey() {}

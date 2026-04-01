@@ -17,6 +17,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         var employee = employeeRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다."));
 
-        return new CustomUserDetails(employee.getUsername(), employee.getPassword(), employee.getRole());
+        return new CustomUserDetails(employee.getId(), employee.getUsername(), employee.getPassword(), employee.getRole());
     }
 }
