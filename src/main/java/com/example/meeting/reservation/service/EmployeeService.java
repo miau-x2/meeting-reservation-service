@@ -1,7 +1,7 @@
 package com.example.meeting.reservation.service;
 
-import com.example.meeting.reservation.common.DatabaseConstraintName;
-import com.example.meeting.reservation.common.ExceptionUtils;
+import com.example.meeting.reservation.common.util.DatabaseConstraintName;
+import com.example.meeting.reservation.common.util.ExceptionUtils;
 import com.example.meeting.reservation.dto.EmployeeCreateRequest;
 import com.example.meeting.reservation.entity.Employee;
 import com.example.meeting.reservation.exception.DuplicateEmployeeUsernameException;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import java.time.Clock;
 import java.time.LocalDateTime;
 
-import static com.example.meeting.reservation.common.StringNormalizer.normalize;
+import static com.example.meeting.reservation.common.util.StringNormalizer.normalize;
 
 @Slf4j
 @Service

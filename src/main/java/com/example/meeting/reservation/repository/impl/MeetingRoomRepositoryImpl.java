@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 import static com.example.meeting.reservation.entity.QMeetingRoom.meetingRoom;
 
 @Repository
@@ -101,5 +103,14 @@ public class MeetingRoomRepositoryImpl implements MeetingRoomRepositoryCustom {
                 .set(meetingRoom.active, active)
                 .where(meetingRoom.id.eq(id))
                 .execute();
+    }
+
+    @Override
+    public List<Long> findAllActiveRoomIds() {
+        return jpaQueryFactory
+                .select(meetingRoom.id)
+                .from(meetingRoom)
+                .where(meetingRoom.active.isTrue())
+                .fetch();
     }
 }

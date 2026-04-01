@@ -1,9 +1,9 @@
 package com.example.meeting.reservation.service;
 
-import com.example.meeting.reservation.common.DatabaseConstraintName;
-import com.example.meeting.reservation.common.ExceptionUtils;
+import com.example.meeting.reservation.common.util.DatabaseConstraintName;
+import com.example.meeting.reservation.common.util.ExceptionUtils;
 import com.example.meeting.reservation.dto.PageResponse;
-import com.example.meeting.reservation.common.StringNormalizer;
+import com.example.meeting.reservation.common.util.StringNormalizer;
 import com.example.meeting.reservation.dto.AdminMeetingRoomListItem;
 import com.example.meeting.reservation.dto.MeetingRoomAddRequest;
 import com.example.meeting.reservation.dto.MeetingRoomListItem;
@@ -80,5 +80,11 @@ public class MeetingRoomService {
     @Transactional
     public void updateActive(Long id, boolean active) {
         meetingRoomRepository.updateActive(id, active);
+    }
+
+    @PreAuthorize("hasAnyRole('STAFF', 'ADMIN')")
+    public MeetingRoom getActiveRoom(Long id) {
+        return meetingRoomRepository.findByIdAndActiveTrue(id)
+                .orElseThrow(() -> new MeetingRoomNotFoundException(id));
     }
 }

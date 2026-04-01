@@ -1,6 +1,6 @@
 package com.example.meeting.reservation.service;
 
-import com.example.meeting.reservation.common.DatabaseConstraintName;
+import com.example.meeting.reservation.common.util.DatabaseConstraintName;
 import com.example.meeting.reservation.dto.EmployeeCreateRequest;
 import com.example.meeting.reservation.entity.Employee;
 import com.example.meeting.reservation.exception.DuplicateEmployeeUsernameException;
