@@ -13,12 +13,6 @@ spring:
   application:
     name: reservation-service
 
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_USERNAME}
-    username: ${MYSQL_USERNAME}
-    password: ${MYSQL_PASSWORD}
-
   jpa:
     open-in-view: false
     show-sql: true
@@ -32,6 +26,47 @@ spring:
     hibernate:
       ddl-auto: validate
 
+  quartz:
+    job-store-type: jdbc
+    jdbc:
+      initialize-schema: never
+    overwrite-existing-jobs: true
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: ClusteredScheduler
+            instanceId: AUTO
+          threadPool:
+            class: org.quartz.simpl.SimpleThreadPool
+            threadCount: 4
+          jobStore:
+            class: org.springframework.scheduling.quartz.LocalDataSourceJobStore
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+            tablePrefix: QRTZ_
+            isClustered: true
+            clusterCheckinInterval: 30000
+
 logging:
   level:
     root: info
+
+app:
+  datasource:
+    main:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}
+      username: ${MYSQL_USERNAME}
+      password: ${MYSQL_PASSWORD}
+      type: com.zaxxer.hikari.HikariDataSource
+    quartz:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}
+      username: ${MYSQL_USERNAME}
+      password: ${MYSQL_PASSWORD}
+      type: com.zaxxer.hikari.HikariDataSource
+
+  reservation:
+    open-time: "09:00"
+    close-time: "18:00"
+    max-duration: "PT2H"

@@ -16,24 +16,16 @@
             <div class="row align-items-center g-4">
                 <div class="col-lg-6">
                     <p class="hero-kicker mb-3">Meeting Reservation Service</p>
-                    <h1 class="display-5 fw-semibold mb-3">회의실 예약을 빠르고 명확하게 관리하세요.</h1>
+                    <h1 class="display-5 fw-semibold mb-3">회의실 조회와 예약내역 확인을 한 화면에서 시작하세요.</h1>
+                    <p class="hero-description mb-4">직원은 자주 쓰는 두 기능에 바로 접근하고, 관리자는 별도 대시보드에서 운영 기능을 계속 사용할 수 있는 메인 화면입니다.</p>
 
                     <div class="d-flex flex-wrap gap-2 mb-4">
                         <a class="btn btn-outline-secondary btn-lg px-4" sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a>
                         <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post" class="d-inline">
                             <button type="submit" class="btn btn-outline-secondary btn-lg px-4">로그아웃</button>
                         </form>
-                        <a class="btn btn-outline-primary btn-lg px-4" th:href="@{/employees/signup}">회원가입</a>
-                        <a class="btn btn-outline-dark btn-lg px-4" href="#features">주요 기능 보기</a>
-                    </div>
-
-                    <div class="hero-metrics row">
-                        <div class="col-sm">
-                            <div class="metric-card">
-                                <strong>실시간</strong>
-                                <span>회의실 예약 상태 확인</span>
-                            </div>
-                        </div>
+                        <a class="btn btn-outline-primary btn-lg px-4" sec:authorize="isAnonymous()" th:href="@{/employees/signup}">회원가입</a>
+                        <a class="btn btn-dark btn-lg px-4" href="#features">주요 기능 보기</a>
                     </div>
                 </div>
 
@@ -48,32 +40,32 @@
                             <div class="showcase-panel">
                                 <div class="showcase-title-row">
                                     <div>
-                                        <p class="showcase-label mb-1">오늘의 예약 현황</p>
-                                        <h2 class="h4 mb-0">8층 Orion 회의실</h2>
+                                        <p class="showcase-label mb-1">오늘의 메인 흐름</p>
+                                        <h2 class="h4 mb-0">회의실 이용 시작</h2>
                                     </div>
-                                    <span class="badge text-bg-success-subtle status-badge">예약 가능</span>
+                                    <span class="badge text-bg-success-subtle status-badge">바로 이동 가능</span>
                                 </div>
 
                                 <div class="timeline-list mt-4">
                                     <div class="timeline-item active">
-                                        <span class="timeline-time">09:30</span>
+                                        <span class="timeline-time">Step 1</span>
                                         <div>
-                                            <strong>프로젝트 회의</strong>
-                                            <p class="mb-0">개발팀 주간 40분</p>
+                                            <strong>회의실 조회</strong>
+                                            <p class="mb-0">선택한 날짜 기준으로 예약 가능한 회의실을 확인합니다.</p>
                                         </div>
                                     </div>
                                     <div class="timeline-item">
-                                        <span class="timeline-time">11:00</span>
+                                        <span class="timeline-time">Step 2</span>
                                         <div>
-                                            <strong>디자인 리뷰</strong>
-                                            <p class="mb-0">프로덕트 주간 30분</p>
+                                            <strong>예약내역 확인</strong>
+                                            <p class="mb-0">내 예약 상태와 사용 예정 시간을 빠르게 확인합니다.</p>
                                         </div>
                                     </div>
                                     <div class="timeline-item">
-                                        <span class="timeline-time">14:00</span>
+                                        <span class="timeline-time">Admin</span>
                                         <div>
-                                            <strong>주간 운영 회의</strong>
-                                            <p class="mb-0">운영팀 주간 1시간</p>
+                                            <strong>관리자 대시보드</strong>
+                                            <p class="mb-0">관리자는 별도 화면에서 회의실과 운영 상태를 관리합니다.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -95,44 +87,31 @@
                 <p class="hero-kicker mb-2">Core Features</p>
             </div>
 
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <article class="feature-card h-100">
-                        <div class="feature-icon"><i class="bi bi-calendar-check"></i></div>
-                        <h3 class="h5">회의실 예약</h3>
-                    </article>
-                </div>
-                <div class="col-md-4">
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-6 col-xl-5">
                     <a class="feature-card-link" th:href="@{/rooms}">
                         <article class="feature-card h-100">
                             <div class="feature-icon"><i class="bi bi-building-check"></i></div>
                             <h3 class="h5">회의실 조회</h3>
+                            <p class="mb-0">날짜별로 사용 가능한 회의실을 확인하고 예약 화면으로 이어집니다.</p>
                         </article>
                     </a>
                 </div>
-                <div class="col-md-4">
-                    <article class="feature-card h-100">
-                        <div class="feature-icon"><i class="bi bi-people"></i></div>
-                        <h3 class="h5">예약 내역 확인</h3>
+                <div class="col-md-6 col-xl-5">
+                    <article class="feature-card h-100 feature-card-muted">
+                        <div class="feature-icon"><i class="bi bi-journal-check"></i></div>
+                        <h3 class="h5">예약내역 확인</h3>
+                        <p class="mb-0">내 예약 목록과 상태를 확인하는 전용 영역입니다.</p>
                     </article>
                 </div>
-                <div class="col-md-4" sec:authorize="hasRole('ADMIN')">
+                <div class="col-md-6 col-xl-5" sec:authorize="hasRole('ADMIN')">
                     <a class="feature-card-link" th:href="@{/admin/dashboard}">
                         <article class="feature-card h-100">
                             <div class="feature-icon"><i class="bi bi-gear-wide-connected"></i></div>
                             <h3 class="h5">관리자 대시보드</h3>
+                            <p class="mb-0">회의실 등록, 상태 변경, 운영 관리 기능은 관리자에게만 노출합니다.</p>
                         </article>
                     </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="content-section content-section-soft">
-        <div class="container py-5">
-            <div class="cta-panel">
-                <div>
-                    <p class="hero-kicker mb-2">Start Now</p>
                 </div>
             </div>
         </div>

@@ -20,6 +20,77 @@
     box-shadow: 0 1rem 3rem rgba(31, 42, 55, 0.05);
 }
 
+.reservation-panel {
+    position: sticky;
+    top: 2rem;
+}
+
+.reservation-placeholder {
+    margin-top: 1.25rem;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border: 1px dashed rgba(124, 144, 165, 0.3);
+    background: linear-gradient(135deg, rgba(13, 110, 253, 0.05), rgba(255, 255, 255, 0.92));
+}
+
+.placeholder-icon {
+    width: 3rem;
+    height: 3rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    border-radius: 0.9rem;
+    background: rgba(13, 110, 253, 0.1);
+    color: #0d6efd;
+    font-size: 1.3rem;
+}
+
+.selected-room-summary {
+    margin-top: 1.25rem;
+    padding: 1.15rem 1.2rem;
+    border-radius: 1rem;
+    background: linear-gradient(135deg, rgba(13, 110, 253, 0.08), rgba(255, 255, 255, 0.94));
+}
+
+.selected-room-floor {
+    color: #0d6efd;
+    font-weight: 600;
+}
+
+.reservation-form-preview {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.25rem;
+}
+
+.reservation-field {
+    display: grid;
+    gap: 0.45rem;
+}
+
+.reservation-field .form-control,
+.reservation-field .form-select {
+    border-radius: 0.9rem;
+    border-color: rgba(124, 144, 165, 0.22);
+    min-height: 2.9rem;
+}
+
+.field-help {
+    color: #607184;
+    font-size: 0.86rem;
+}
+
+.field-error {
+    color: #dc3545;
+    font-size: 0.86rem;
+}
+
+.field-success {
+    color: #198754;
+    font-size: 0.86rem;
+}
+
 .floor-filter-select {
     width: 8rem;
 }
@@ -30,34 +101,57 @@
     white-space: nowrap;
 }
 
-.room-card {
-    border-radius: 1.2rem;
-    border: 1px solid rgba(124, 144, 165, 0.16);
-    background: #fff;
-    padding: 1.35rem;
-    box-shadow: 0 0.75rem 2rem rgba(31, 42, 55, 0.04);
+.meeting-rooms-table th {
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #607184;
+    border-bottom-color: rgba(124, 144, 165, 0.22);
 }
 
-.room-card-header {
+.meeting-rooms-table td {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    vertical-align: middle;
+}
+
+.room-row {
+    cursor: pointer;
+}
+
+.room-row:hover {
+    background: rgba(13, 110, 253, 0.04);
+}
+
+.room-row-active {
+    background: rgba(13, 110, 253, 0.08);
+}
+
+.room-name-row {
     display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    align-items: start;
+    gap: 0.9rem;
+    align-items: flex-start;
 }
 
-.room-floor {
-    color: #0d6efd;
-    font-weight: 600;
+.room-name {
+    color: #223042;
 }
 
 .room-icon {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     color: #0d6efd;
+    flex-shrink: 0;
 }
 
-.room-description {
-    color: #607184;
-    min-height: 3rem;
+.room-floor-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.42rem 0.72rem;
+    border-radius: 999px;
+    background: rgba(13, 110, 253, 0.08);
+    color: #0d6efd;
+    font-weight: 600;
 }
 
 .room-capacity {
@@ -87,8 +181,14 @@
     color: #fff;
 }
 
-@media (min-width: 1200px) {
-    .col-xl-room-5 {
-        width: 20%;
+@media (max-width: 991.98px) {
+    .reservation-panel {
+        position: static;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .room-name-row {
+        gap: 0.75rem;
     }
 }
